@@ -50,6 +50,13 @@ public class DataGenerator {
         String name;
         String phone;
 
+        public UserInfo() {
+
+            phone = new String();
+            name = new String();
+            city = new String();
+        }
+
         public String getCity() {
             return city;
         }
