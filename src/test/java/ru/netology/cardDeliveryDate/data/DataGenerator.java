@@ -2,7 +2,7 @@
 package ru.netology.cardDeliveryDate.data;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.Name;
+import lombok.Getter;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ public class DataGenerator {
     }
 
     public static String generateCity() {
-        var cities = new String[] {
+        var cities = new String[]{
                 "Москва", "Ростов-на-Дону", "Омск", "Ярославль", "Челябинск"
         };
         return cities[new Random().nextInt(cities.length)];
@@ -40,33 +40,15 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            return new UserInfo();
+            return new UserInfo(generateCity(),generateName(locale), generatePhone(locale));
         }
     }
+
 
     @Value
     public static class UserInfo {
         String city;
         String name;
         String phone;
-
-        public UserInfo() {
-
-            phone = new String();
-            name = new String();
-            city = new String();
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
     }
-    }
+}

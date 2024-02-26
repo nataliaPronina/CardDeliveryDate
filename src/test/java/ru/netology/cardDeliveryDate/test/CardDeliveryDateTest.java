@@ -24,11 +24,11 @@ class CardDeliveryDateTest {
     @Test
 
     void shouldSuccessfulPlanMeeting() {
-        var validUser = DataGenerator.Registration.generateUser("ru");
-        var daysToAddForFirstMeeting = 4;
-        var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
-        var daysToAddForSecondMeeting = 7;
-        var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
+        DataGenerator.UserInfo validUser = DataGenerator.Registration.generateUser("ru");
+        int daysToAddForFirstMeeting = 4;
+        String firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
+        int daysToAddForSecondMeeting = 7;
+        String secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
         $("[data-test-id=city] input").setValue(validUser.getCity());
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(firstMeetingDate);
@@ -38,12 +38,13 @@ class CardDeliveryDateTest {
         $(byText("Запланировать")).click();
         $(byText("Успешно")).shouldBe(Condition.visible, Duration.ofSeconds(15));
         $("[data-test-id=success-notification].notification_content")
-                .shouldHave(Condition.exactText("Встреча успешно запланирована на" + firstMeetingDate))
+                .shouldHave(Condition.exactText(
+                        "Встреча успешно запланирована на" + firstMeetingDate))
                 .shouldBe(Condition.visible);
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(secondMeetingDate);
         $(byText("Запланировать")).click();
-        $("[data-test-id='replan-notification'].notification_content")
+        $("[data-test-id='replan-notification'] .notification_content")
                 .shouldHave(Condition.exactText("У вас уже запланирована встреча на другую дату. Перепланировать?"))
                 .shouldBe(Condition.visible)  ;
         $("[data-test-id='replan-notification'] button").click();
