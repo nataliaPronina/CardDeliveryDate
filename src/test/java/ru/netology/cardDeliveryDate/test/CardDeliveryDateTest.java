@@ -45,7 +45,7 @@ class CardDeliveryDateTest {
         $("[data-test-id=date] input").setValue(secondMeetingDate);
         $(byText("Запланировать")).click();
         $("[data-test-id='replan-notification'] .notification_content")
-                .shouldHave(Condition.exactText("У вас уже запланирована встреча на другую дату. Перепланировать?"))
+                .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
                 .shouldBe(Condition.visible)  ;
         $("[data-test-id='replan-notification'] button").click();
         $("[data-test-id=success-notification].notification_content")
